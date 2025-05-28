@@ -3,12 +3,11 @@ import * as Yup from 'yup';
 
 import './main.css'
 
-
-export default function AddForm ({setTasks, tasks}){
-
-	const validation = Yup.object({
+const validation = Yup.object({
         text: Yup.string().min(5, "Must be longer than 5 chars").required("Required")
     });
+
+export default function AddForm ({setTasks, tasks}){
 
 	const handleSubmit = values =>{
 		const newTask = {
@@ -21,16 +20,17 @@ export default function AddForm ({setTasks, tasks}){
 	}
 
 	return <Formik 
-		initialValues={{text: ''}}
-		onSubmit={handleSubmit} 
-		validationSchema={validation} 
-		render={
-		errors => 
-	<Form className="form js--form">
-		{/* {errors.text ? <div>{errors.text}</div> : null}  */}
-        <Field type="text" name="text"  className="form__input js--form__input" />
-		<ErrorMessage name='text' component="div" />
-        <button type="submit" className="form__btn">Додати</button>
-    	</Form>}>
-	</Formik>
+			initialValues={{
+				text: ''
+			}}
+			onSubmit={handleSubmit} 
+			validationSchema={validation} 
+			render={errors => 
+						<Form className="form js--form">
+							{/* {errors.text ? <div>{errors.text}</div> : null}  */}
+							<Field type="text" name="text"  className="form__input js--form__input" />
+							<ErrorMessage name='text' component="div" />
+							<button type="submit" className="form__btn">Додати</button>
+							</Form>}>
+			</Formik>
 }
